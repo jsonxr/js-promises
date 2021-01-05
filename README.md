@@ -4,17 +4,23 @@
 yarn add @jsonxr/promises
 ```
 
-A pool of promises that will limit the number of executions that will concurrently execute.  If you are making API calls using the standard built-in promises, all the promises are executed simultaneously which can cause problems with rate limiting. This will limit the number of concurrent executions.
+A pool of promises that will limit the number of executions that will
+concurrently execute.  If you are making API calls using the standard built-in
+promises, all the promises are executed simultaneously which can cause problems
+with rate limiting. This will limit the number of concurrent executions.
 
 ## `all(array, options)`
 
-Performs the same function as [`Promise.all`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) but throttles the creation of promises and limits the number of concurrent promises.
+Performs the same function as
+[`Promise.all`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+but throttles the creation of promises and limits the number of concurrent
+promises.
 
 ### Parameters
 * `array` - An array of functions that create promises
 * `options` -
-  * `limit` - Maximum number of promises
-  * `throttled` - min number of ms to wait before creating the promise
+  * `limit` - Maximum number of promises (default 6, chrome concurrent requests)
+  * `throttle` - number of ms to wait before creating the promise (default 0)
 
 
 ### Example
@@ -35,7 +41,7 @@ all(promises, { limit: 2, throttle: 100 })
 
 output
 ```
-{ status: 'fulfilled', value: [1,2,3,4] }
+[1,2,3,4]
 ```
 
 ## allSettled
@@ -69,7 +75,8 @@ output
 
 ## Do not do this
 
-Promises are scheduled for execution the moment they are created. PromisePool therefore expects a promise creator function, not a promise.
+Promises are scheduled for execution the moment they are created. promises
+therefore expects a promise creator function, not a promise.
 
 ```javascript
 const fn = async (i) => i; // Promise function

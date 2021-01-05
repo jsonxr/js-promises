@@ -1,6 +1,6 @@
 {
   "name": "@jsonxr/promises",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Promises that will limit the number of executions that will concurrently execute",
 
   "main": "lib/cjs/index.js",
